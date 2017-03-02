@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
+Version: 1.6.0
+Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>SemiCircular ProgressBar</title>
+
+    <meta name="description" content="alerts" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     
+    
+    <script src="/EncuestaWeb/js/RGraph.common.core.js"></script>
+   	<script src="/EncuestaWeb/js/RGraph.semicircularprogress.js"></script>
+	
+</head>
+
+<!-- /Head -->
+<!-- Body -->
+<body style="line-height:1;" onload="CargarGrafico();">
+
+	<div class="widget-body" >
+
+		<div style="margin-left:50px;display:inline-block">
+			<p>Porcentajes</p>
+			<canvas id='cvs'></canvas>
+		</div>
+		
+	    
+    </div>
+    
+    <script>
+    function CargarGrafico()
+    {
+   		new RGraph.SemiCircularProgress({
+			id:'cvs',
+			min: 0,
+			max: 100,
+			value: 97,
+			options: {
+				colors : ['Gradient('+'#00EE76'+':'+'#008B45'+')'],
+				unitsPost: '%',
+				labelsCenterSize: 17
+			}
+   		}).draw();
+    }	
+	</script>
+</body>
+		
+</html>

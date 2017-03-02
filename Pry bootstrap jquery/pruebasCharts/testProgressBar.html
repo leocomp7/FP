@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
+Version: 1.6.0
+Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Tipo Empresa</title>
+
+    <meta name="description" content="alerts" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="/EncuestaWeb/css/jquerysctipttop.css" />
+   <link rel="stylesheet" href="/EncuestaWeb/css/bootstrap.min2.css" />
+    
+    
+    <script src="/EncuestaWeb/js/jquery-1.12.4.min.js"></script>
+    
+	
+	 <script src="/EncuestaWeb/js/bootstrap-progressbar-manager.js"></script>
+	<script src="/EncuestaWeb/js/bootstrap-progressbar-manager.min.js"></script>
+ <script src="/EncuestaWeb/js/bootstrap-brogressbar-manager.js"></script>
+   
+	
+</head>
+
+<!-- /Head -->
+<!-- Body -->
+<body style="line-height:1;">
+
+	<div class="widget-body" >
+
+		<div style="text-align: center;width: 100%;font-weight: bold;font-size: 1.3em;">
+			Test Progress Bar  
+		</div>
+		<div >
+		<div id="bar1" >
+			Siempre
+		 </div>
+		 <div id="bar2" >
+			Casi siempre
+		 </div>
+		 <div id="bar3" >
+			A veces
+		 </div>
+		 <div id="bar4" >
+			Casi nunca
+		 </div>
+		 <div id="bar5" >
+			Nunca
+		 </div>
+	    </div>
+    </div>
+    
+    <script>
+   
+    
+		myProgress = $('#bar1').progressbarManager({
+			totalValue : 30000,
+			initValue : 10 ,
+		     animate : true ,
+		     stripe : true
+		});
+
+		//$('#bar1').css({'background-color': "green"});
+		
+		myProgress.setValue(5000);
+		
+		myProgress.style('success').animate().stripe();
+		//myProgress.style('primary').animate().stripe();
+		//myProgress.style('warning').animate().stripe();
+		//myProgress.style('success').animate().stripe();
+		//myProgress.style('danger').stripe();
+		myProgress2 = $('#bar2').progressbarManager({
+			totalValue : 30000,
+			initValue : 10 ,
+		     animate : true ,
+		     stripe : true
+		});
+
+		//$('#bar1').css({'background-color': "green"});
+		
+		myProgress2.setValue(5000);
+		
+		myProgress2.style('primary').animate().stripe();
+
+
+		myProgress3 = $('#bar3').progressbarManager({
+			totalValue : 30000,
+			initValue : 10 ,
+		     animate : true ,
+		     stripe : true
+		});
+
+		//$('#bar1').css({'background-color': "green"});
+		
+		myProgress3.setValue(10000);
+		
+		myProgress3.style('info').animate().stripe();
+
+
+		myProgress4 = $('#bar4').progressbarManager({
+			totalValue : 30000,
+			initValue : 10 ,
+		     animate : true ,
+		     stripe : true
+		});
+
+		//$('#bar1').css({'background-color': "green"});
+		
+		myProgress4.setValue(9000);
+		
+		myProgress4.style('warning').animate().stripe();
+
+		myProgress5 = $('#bar5').progressbarManager({
+			totalValue : 30000,
+			initValue : 10 ,
+		     animate : true ,
+		     stripe : true
+		});
+
+		//$('#bar1').css({'background-color': "green"});
+		
+		myProgress5.setValue(1000);
+		
+		myProgress5.style('danger').animate().stripe();
+	</script>
+</body>
+		
+</html>
