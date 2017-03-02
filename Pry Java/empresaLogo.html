@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
+Version: 1.6.0
+Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>Empresa</title>
+
+    <meta name="description" content="alerts" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
+
+	<link id="beyond-link" href="assets/css/beyond.min.css" rel="stylesheet" />
+	<link href="assets/css/animate.min.css" rel="stylesheet" />
+
+
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="resources/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+	
+	<link rel="stylesheet" href="resources/js/primeui-4.1.15/themes/omega/theme.css" />
+	<link rel="stylesheet" href="resources/js/jquery-ui-1.12.1/jquery-ui.css" />
+	<link rel="stylesheet" href="resources/js/primeui-4.1.15/primeui.min.css" />
+	<link rel="stylesheet" href="resources/css/sweetalert2.min.css" />
+	
+	<script src="resources/js/jquery-1.12.3.js"></script>
+	<script src="resources/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>	
+	<script src="resources/js/dataTables.bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="resources/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="resources/js/primeui-4.1.15/primeui.js"></script>
+	
+	<script type="text/javascript" src="resources/js/sweetalert2.min.js"></script>
+	
+	<link rel="stylesheet" href="resources/css/style.css" />
+	<script src="resources/js/util.js"></script>
+</head>
+
+<!-- /Head -->
+<!-- Body -->
+<body style="line-height:1;">
+
+	<div class="widget-body">
+
+		<div style="text-align: center;width: 100%;font-weight: bold;font-size: 1.3em;">
+			LOGO Empresa  
+		</div>
+
+	
+		<div class="Table" style="display: none;">		
+			<div class="Row">
+				<div class="Cell">
+					<button type="button" class="btn btn-blue" onclick="showCreate();"> 
+						<i class="fa fa-plus"></i>
+					</button>
+				</div>
+			</div>
+				
+		</div>
+		
+	    <div style="height: 10px;"></div>
+	    
+	    
+	    
+	    <table id="tblEmpresa" class="table table-striped table-bordered" cellspacing="0" width="100%">
+		     <thead>
+	            <tr role="row">
+	                <th>Razon Social</th>
+	                <th>Nombre Comercial</th>
+	                <th>Ruc</th>
+	                <th style="width: 15px;'"></th>
+	            </tr>
+	        </thead>
+	    </table>
+	    </div>
+
+
+
+	<div id="dlgCreate" tabindex="-1" role="dialog" class="modal fade">
+	
+		<div class="modal-dialog">
+    
+	    <div class="modal-content">
+	    
+			<div class="modal-header">
+				<h4 class="modal-title"><span id="dlgCreateLabel">Tipo Empresa</span> </h4>
+			</div>
+		    
+			<div class="modal-body">
+				<div class="widget-body">
+	
+	
+				<form role="form" id="data" enctype="multipart/form-data">
+			         
+			         <div style="display: none;">
+			         	<input id="empCodigo" value="">
+			         </div>
+			         
+			         <div class="form-group">			 
+			             <label for="sminput">Nombre Comercial</label>
+			             <input type="text"  class="form-control input-sm" id="empNombreComercial" placeholder="Nombre Comercial" readonly >
+			         </div>
+			         <div class="form-group">
+			             <label for="sminput">Razón Social</label>
+			             <input type="text" class="form-control input-sm" id="empRazonSocial" placeholder="Razon Social" readonly>
+			         </div>
+			         <div class="form-group" style="display: none;">
+			             <label for="sminput">RUC</label>
+			             <input type="text" class="form-control input-sm" id="empRuc" name="empRuc" placeholder="RUC">
+			         </div>
+			         <div class="form-group">
+			             <label for="sminput">Logotipo</label>
+			             <input type="file" class="form-control input-sm" id="empLogo" name="empLogo" placeholder="LOGO">
+			         </div>
+			         
+			         
+			         <div class="form-group" style="text-align: center;">
+						<button type="submit" value="Submit" class="btn btn-blue" > 
+							<i class="fa fa-save"></i> Guardar
+						</button>
+						<button type="button" class="btn btn-blue" onclick="cancel();"> 
+							<i class="fa fa-ban"></i> Cancelar
+						</button>			
+			         </div>
+			     </form>
+			     
+			     
+			     
+			     </div>
+			     
+		     	</div>
+		     
+	     </div>
+	     
+	     </div>
+	
+	</div>
+
+
+	<script>
+	
+	    $('#tblEmpresa').DataTable({
+	    	 "oTableTools": {
+                 "aButtons": [
+                     "copy", "csv", "xls", "pdf", "print"
+                 ],
+                 "sSwfPath": "assets/swf/copy_csv_xls_pdf.swf"
+             },
+             "bInfo" : false,
+             "language": {
+                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+             }
+		});
+
+
+		function showCreate(){
+
+			$('#dlgCreate').modal();
+			$('#dlgCreateLabel').text("Crear Empresa");
+			clear();
+			readSectorEmpresarial();
+		}
+
+		function showEdit(empCodigo){
+
+			var DTO = {
+					empCodigo: empCodigo,
+			    };
+			
+	        $.ajax({
+	        	type: 'GET',
+		        url: getBaseUrl()+'EmpresaController',
+		        dataType: "json",
+		        data: JSON.stringify(DTO),
+		        success: function(data, textStatus, jqXHR){
+
+		        	if(data.success){
+			        	var list= eval(data.data);
+						$.each(list, function (id, value) {
+
+				        	$('#empNombreComercial').val(value.empNombreComercial);
+							$('#empRazonSocial').val(value.empRazonSocial);
+							$('#empRuc').val(value.empRuc);
+							$('#empCodigo').val(value.empCodigo);
+							$('#empSector').val(value.empSector);
+							$('#empTipo').val(value.empTipo);
+							$('#empPais').val(value.empPais);
+							readProvincia();
+							$('#empProvincia').val(value.empProvincia);
+							readCiudad();
+							$('#empCiudad').val(value.empCiudad);
+							$('#empDireccion').val(value.empDireccion);
+							$('#empContacto').val(value.empContacto);
+							$('#empTelefono').val(value.empTelefono);
+							
+			            });     		
+			        }
+		        },
+		        error: function(data, textStatus, errorThrown){
+
+		        	console.log(data);	
+					
+		        }
+		    });
+			
+			$('#dlgCreateLabel').text("Actualizar Empresa");
+			$('#dlgCreate').modal();
+		}
+
+
+
+		//Program a custom submit function for the form
+		$("form#data").submit(function(event){
+		 
+		  //disable the default form submission
+		  event.preventDefault();  
+		  var formData = new FormData($(this)[0]);
+		  
+		  $.ajax({
+		    url: 'EmpresaControllerLogo?empCodigo='+$('#empCodigo').val()+'.png'+'&empLogo='+$('#empLogo').val(),
+		    type: 'POST',
+		    data: formData,
+		    async: false,
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    success: function (returndata) {
+		    	
+		    	if(returndata.includes('success')){
+		        
+		        	  successSP('success');
+		          }
+		          else{
+		        
+		        	  errorSP(returndata	);
+			      }
+		    },
+	          error: function (returndata) {
+		          
+	          }
+		  });
+		  return false;
+		});
+
+		
+		function createLogo(){
+
+			if($('#empCodigo').val()!=""){
+				var DTO = {
+						empRuc:$('#empRuc').val(),
+						
+				};
+			}
+		    
+		    $.ajax({
+		        type: 'POST',
+		        url: getBaseUrl()+'EmpresaControllerLogo',
+		        contentType: false,
+		        async: false,
+		        processData: false,
+		        data:DTO,
+		        success: function(data){
+			        alert(data);
+		        },
+		        error: function(data1){
+		        	alert(data1);
+		        }
+		    });			
+		}
+		
+
+		function readEmpresa(){
+		    
+		 	$.ajax({
+		    	type: 'GET',
+		        url: getBaseUrl()+'EmpresaController',
+		        dataType: "json",
+		        success: function(data, textStatus, jqXHR){
+	
+					if(data.success){
+			        	
+			        	var table = $('#tblEmpresa').dataTable();
+
+			        	table.fnClearTable();
+
+			        	$.each(eval(data.data), function (id, value) {
+	
+			        		colEdit="<button type='button' class='btn btn-blue' onclick=showEdit('"+value.empCodigo+"');><i class='fa fa-pencil'></i></button>";
+				        	
+			            	table.fnAddData([value.empRazonSocial,value.empNombreComercial,value.empRuc,colEdit]);
+			            });
+					}
+		        },
+		        error: function(data, textStatus, errorThrown){
+					console.log(data);
+		        }
+		    });			
+		}
+
+	
+
+	function readTipoEmpresa(){
+
+		var DTO = {
+				catTipoCatalogo:6,
+		};
+
+	 	$.ajax({
+	    	type: 'GET',
+	    	url: getBaseUrl()+'CatalogoController',
+	        dataType: "jsonp",
+	        contentType: "application/json",
+	        data: DTO,
+	        success: function(data, textStatus, jqXHR){
+
+			
+	        },
+	        error: function(data1, textStatus, errorThrown){
+
+	        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+		        
+				if(data.success){
+		        	
+		        	$("#empTipo").empty();
+		        	$("#empTipo").append("<option value=''>--Seleccione--</option>");
+		        	
+		       		$.each(eval(data.data), function(key, value) {
+		          		$("#empTipo").append("<option value='"+value.catCodigo+"'>" + value.catDescripcion + "</option>");
+		      		});
+				}
+	        }
+	    });			
+	}
+
+	function readSectorEmpresarial(){
+
+		var DTO = {
+				catTipoCatalogo:1,
+		};
+
+	 	$.ajax({
+	    	type: 'GET',
+	    	url: getBaseUrl()+'CatalogoController',
+	        dataType: "jsonp",
+	        contentType: "application/json",
+	        data: DTO,
+	        success: function(data, textStatus, jqXHR){
+
+			
+	        },
+	        error: function(data1, textStatus, errorThrown){
+
+	        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+		        
+				if(data.success){
+		        	
+		        	$("#empSector").empty();
+		        	$("#empSector").append("<option value=''>--Seleccione--</option>");
+		        	
+		       		$.each(eval(data.data), function(key, value) {
+		          		$("#empSector").append("<option value='"+value.catCodigo+"'>" + value.catDescripcion + "</option>");
+		      		});
+				}
+	        }
+	    });			
+	}
+
+	function readPais(){
+
+		var DTO = {
+				catTipoCatalogo:3,
+		};
+
+	 	$.ajax({
+	    	type: 'GET',
+	    	url: getBaseUrl()+'CatalogoController',
+	        dataType: "jsonp",
+	        contentType: "application/json",
+	        data: DTO,
+	        success: function(data, textStatus, jqXHR){
+
+			
+	        },
+	        error: function(data1, textStatus, errorThrown){
+
+	        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+		        
+				if(data.success){
+		        	
+		        	$("#empPais").empty();
+		        	$("#empPais").append("<option value=''>--Seleccione--</option>");
+		        	
+		       		$.each(eval(data.data), function(key, value) {
+		          		$("#empPais").append("<option value='"+value.catCodigo+"'>" + value.catDescripcion + "</option>");
+		      		});
+				}
+	        }
+	    });			
+	}
+
+	function readProvincia(){
+
+		if($("#empPais").val()!=""){
+			var DTO = {
+					catPadre:$("#empPais").val(),
+					catTipoCatalogo:4
+			};
+
+		 	$.ajax({
+		    	type: 'GET',
+		    	url: getBaseUrl()+'CatalogoController',
+		        dataType: "jsonp",
+		        contentType: "application/json",
+		        data: DTO,
+		        async: false,
+		        success: function(data, textStatus, jqXHR){
+
+				
+		        },
+		        error: function(data1, textStatus, errorThrown){
+
+		        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+			        
+					if(data.success){
+			        	
+			        	$("#empProvincia").empty();
+			        	$("#empProvincia").append("<option value=''>--Seleccione--</option>");
+			        	
+			       		$.each(eval(data.data), function(key, value) {
+			          		$("#empProvincia").append("<option value='"+value.catCodigo+"'>" + value.catDescripcion + "</option>");
+			      		});
+					}
+		        }
+		    });						
+		}else{
+			$("#empProvincia").empty();
+			$("#empProvincia").append("<option value=''>--Seleccione--</option>");
+		}
+	}
+
+	function readCiudad(){
+
+		if($("#empProvincia").val()!=""){
+			var DTO = {
+					catPadre:$("#empProvincia").val(),
+					catTipoCatalogo:5
+			};
+
+		 	$.ajax({
+		    	type: 'GET',
+		    	url: getBaseUrl()+'CatalogoController',
+		        dataType: "jsonp",
+		        contentType: "application/json",
+		        data: DTO,
+		        async: false,
+		        success: function(data, textStatus, jqXHR){
+				
+		        },
+		        error: function(data1, textStatus, errorThrown){
+
+		        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+			        
+					if(data.success){
+			        	
+			        	$("#empCiudad").empty();
+			        	$("#empCiudad").append("<option value=''>--Seleccione--</option>");
+			        	
+			       		$.each(eval(data.data), function(key, value) {
+			          		$("#empCiudad").append("<option value='"+value.catCodigo+"'>" + value.catDescripcion + "</option>");
+			      		});
+					}
+		        }
+		    });						
+		}else{
+			$("#empCiudad").empty();
+			$("#empCiudad").append("<option value=''>--Seleccione--</option>");
+		}
+	}
+	
+	function clear(){
+		$('#empNombreComercial').val("");
+		$('#empRazonSocial').val("");
+		$('#empRuc').val("");
+		$('#empCodigo').val("");
+		$('#empTipo').val("");
+		$('#empPais').val("");
+		
+		$("#empProvincia").empty();
+		$("#empProvincia").append("<option value=''>--Seleccione--</option>");
+		$('#empProvincia').val("");
+		
+		$("#empCiudad").empty();
+		$("#empCiudad").append("<option value=''>--Seleccione--</option>");
+		$('#empCiudad').val("");
+		
+		$('#empDireccion').val("");
+		$('#empContacto').val("");
+		$('#empTelefono').val("");
+
+	}
+
+	$("#empPais").change(function() {
+		readProvincia();
+	});
+
+	$("#empProvincia").change(function() {
+		readCiudad();
+	});
+	
+	
+	function cancel(){
+		clear();
+		$('#dlgCreate').modal('toggle');
+	}
+	
+	$( document ).ready(function() {
+		readEmpresa();
+		readTipoEmpresa();
+		readSectorEmpresarial();
+		readPais();
+	});
+	
+	</script>
+	
+	<script src="assets/js/skins.min.js"></script>
+	<script src="assets/js/slimscroll/jquery.slimscroll.min.js"></script>	
+	<!--Beyond Scripts-->
+	<script src="assets/js/beyond.js"></script>
+		
+	<!--Page Related Scripts-->
+    <script src="assets/js/toastr/toastr.js"></script>	
+	
+</body>
+		
+</html>

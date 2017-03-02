@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
+Version: 1.6.0
+Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>Tablero</title>
+
+    <meta name="description" content="alerts" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
+
+	<link id="beyond-link" href="assets/css/beyond.min.css" rel="stylesheet" />
+	<link href="assets/css/animate.min.css" rel="stylesheet" />
+
+
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="resources/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+	
+	<link rel="stylesheet" href="resources/js/primeui-4.1.15/themes/omega/theme.css" />
+	<link rel="stylesheet" href="resources/js/jquery-ui-1.12.1/jquery-ui.css" />
+	<link rel="stylesheet" href="resources/js/primeui-4.1.15/primeui.min.css" />
+	<link rel="stylesheet" href="resources/css/sweetalert2.min.css" />
+	
+	<script src="resources/js/jquery-1.12.3.js"></script>
+	<script src="resources/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="resources/js/dataTables.bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="resources/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="resources/js/primeui-4.1.15/primeui.js"></script>
+	
+	<script type="text/javascript" src="resources/js/sweetalert2.min.js"></script>
+	
+	<link rel="stylesheet" href="resources/css/style.css" />
+	<script src="resources/js/util.js"></script>
+	
+</head>
+
+<!-- /Head -->
+<!-- Body -->
+<body style="line-height:1; margin: 0 auto;">
+
+	<div style="text-align: center;width: 100%;font-weight: bold;font-size: 1.3em;padding-top:20px">
+		TABLERO DE GERENCIAMIENTO VISUAL  
+	</div>
+	<div>
+		<br><br><br>
+	</div>
+	<div>
+    	<img id='logoPage'  style="width:77px ;height:57px; align:center;margin-left:50%"  >
+    </div>
+	<div class="animated fadeInDown" style="margin: 10% auto; max-width: 900px; position: relative;top: -140px;">
+		<div class="row">
+			<div id="conTab"></div>
+		</div>
+	</div>
+		
+	<div style="height: 10px;"></div>
+	
+	<!-- Contenido -->
+	<div style="width: 100%;margin: 0 auto;">
+		
+	</div>
+
+	<script>
+
+	
+		function loadLogo()
+		{
+			var inputLogo;
+			var ruta = '';
+
+			var usu_empresa;
+			
+			inputLogo = document.getElementById('logoPage');
+
+			
+
+			ruta = '../IndicadorWeb/assets/img/';
+			
+			//ruta = '../standalone/deployments/Indicador.ear/IndicadorWeb.war/assets/img';
+
+			usu_empresa=sessionStorage.getItem("usuEmpresa");
+			
+			var DTO = {
+					empCodigo: usu_empresa,
+			    };
+		    
+			
+			
+			 $.ajax({
+		        	type: 'GET',
+			        url: getBaseUrl()+'EmpresaController',
+			        dataType: "json",
+			        data: JSON.stringify(DTO),
+			        success: function(data, textStatus, jqXHR){
+	
+			        	if(data.success){
+				        	var list= eval(data.data);
+							$.each(list, function (id, value) {
+								ruta=ruta.concat(value.empCodigo).concat('.png');
+								inputLogo.setAttribute('src',ruta);
+				            });     		
+				        }
+			        },
+			        error: function(data, textStatus, errorThrown){
+	
+			        	console.log(data);	
+						
+			        }
+			    });
+		}
+		
+	
+		function readTablero(){
+
+			if(sessionStorage.getItem("usuEmpresa")!=null){
+
+				var DTO = {
+						tabEmpresa:sessionStorage.getItem("usuEmpresa"),
+				};
+
+				var tieneTablero=false;
+				  
+			    $.ajax({
+			        type: 'GET',
+			        url: getBaseUrl()+'TableroController',
+			        dataType: "jsonp",
+			        contentType: "application/json",
+			        data: DTO,
+			        success: function(data, textStatus, jqXHR){
+			        	console.log(data);		        		
+			        },
+			        error: function(data1, textStatus, errorThrown){
+
+			        	var data=JSON.parse(eval(JSON.stringify(data1.responseText)));
+
+			        	if(data.success){
+
+			        		$("#conTab").empty();
+
+			        		var html='';
+			        		
+				        	$.each(eval(data.data), function (id, value) {
+
+				        		tieneTablero=true;
+								html+='<div class="col-lg-6 col-sm-6 col-xs-8" style="cursor: pointer;" onclick="next('+value.tabCodigo+')">';
+								html+='<div class="databox databox-xlg radius-bordered databox-shadowed databox-vertical">';
+								html+='<div class="databox-top" style="height: 35px;">';
+								html+='<span class="databox-header">';
+								html+='<span style="color: blue;">'+value.tabNombre+'</span>';
+								html+='</span>';
+								html+='</div>';
+								html+='<div style="height: 35px;">';
+								html+='</div>';
+								html+='<div class="databox-bottom databox-graded ">';
+								html+='<div class="databox-text darkgray" style="font-size: 15px;">Descripción: '+value.tabDescripcion+'</div>';
+								html+='<div class="databox-text darkgray" style="font-size: 15px;">Rojo Hasta: '+value.tabRojo+'%</div>';
+								html+='<div class="databox-text darkgray" style="font-size: 15px;">Amarillo Hasta: '+value.tabAmarillo+'%</div>';
+								if(value.tabAzul!=null)
+									html+='<div class="databox-text darkgray" style="font-size: 15px;">Azul Hasta: '+value.tabAzul+'%</div>';
+								html+='</div>';
+								html+='</div>';
+								html+='</div>';
+				            });
+
+				        	if(tieneTablero)
+			        			$("#conTab").html(html);
+				        	else
+				        		window.location = "inicio.html";
+				        }
+			       
+			        }
+			    });			
+			}else{
+				window.location = "index.html";
+			}
+		}
+
+		function next(tabCodigo){
+			sessionStorage.setItem("usuTablero", tabCodigo);
+			window.location = "inicio.html";
+		}
+		
+		$( document ).ready(function() {
+			readTablero();
+			loadLogo();
+		});
+	
+	</script>
+
+	<script src="assets/js/skins.min.js"></script>
+	<script src="assets/js/slimscroll/jquery.slimscroll.min.js"></script>	
+	<!--Beyond Scripts-->
+	<script src="assets/js/beyond.js"></script>
+		
+	<!--Page Related Scripts-->
+    <script src="assets/js/toastr/toastr.js"></script>	
+	
+	
+	
+</body>
+		
+</html>
