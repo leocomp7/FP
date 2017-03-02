@@ -1,0 +1,5 @@
+
+Sub proyecto javascript funcional.
+
+Se utiliza el metodo nativo each de javascript pàra un vector , en lugar de recorrerlo con un ciclo for.
+
